@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SwipeMenuView">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SettingView">
+        <attr name="left_text" format="string"/>
+        <attr name="l_text_size" format="dimension"/>
+        <attr name="l_text_color" format="color"/>
+        <attr name="left_text_margin_left" format="dimension"/>
+
+        <attr name="left_icon" format="integer"/>
+        <attr name="left_iconSize" format="dimension"/>
+
+        <attr name="right_style" format="enum">
+            <enum name="iconShow" value="0"/>
+            <enum name="iconHide" value="1"/>
+            <enum name="iconCheck" value="2"/>
+            <enum name="iconSwitch" value="3"/>
+        </attr>
+
+        <attr name="right_icon" format="integer"/>
+        <attr name="right_icon_size" format="dimension"/>
+
+        <attr name="is_show_right_text" format="boolean"/>
+        <attr name="right_text" format="string"/>
+        <attr name="right_text_size" format="dimension"/>
+        <attr name="right_text_color" format="color"/>
+
+        <attr name="is_show_under_line" format="boolean"/>
+    </declare-styleable>
+</resources>

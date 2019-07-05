@@ -1,0 +1,106 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName rootProject.ext.versionName
+        versionCode rootProject.ext.versionCode
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        flavorDimensions "default"
+
+        android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+
+        /**
+         * 此处配置数据用于AndroidManifest文件调用
+         */
+//        manifestPlaceholders = [
+//                PAK_NAME : rootProject.ext.applicationId
+//        ]
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'x86', "mips", 'armeabi7-v7a', "armeabi-v7a"
+//, 'arm64-v8a', 'mips64', 'x86_64'
+        }
+    }
+    buildTypes {
+        debug {
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+
+            buildConfigField "String", "env", "\"" + rootProject.ext.env + "\""
+//            buildConfigField "String", "authorName", "\"" + rootProject.ext.authorName + "\""
+        }
+        release {
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+
+            buildConfigField "String", "env", "\"" + rootProject.ext.env + "\""
+//            buildConfigField "String", "authorName", "\"" + rootProject.ext.authorName + "\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        tongyong {
+            manifestPlaceholders = [APP_CHANNEL: "a-tongyong"]
+        }
+        huawei {
+            manifestPlaceholders = [APP_CHANNEL: "a-huawei"]
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def aid = variant.applicationId.split("\\.")
+            def name = aid[aid.length - 1]
+            def flavor = variant.productFlavors[0].name
+            def buildType = env
+            def version = variant.versionName
+            def versionCode = variant.versionCode
+            def date = new Date();
+            def formattedDate = date.format('yyyyMMdd_HHmm')
+            outputFileName = "${name}" +
+                    "${"_"}${flavor}" +
+                    "${"_"}${buildType}" +
+                    "${"_"}${"v"}${version}" +
+                    "${"_"}${"b"}${versionCode}" +
+                    "${"_"}${formattedDate}.apk"
+            if (variant.buildType.name == "release") {
+                variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath
+                        + "/app/releaseOutputs")
+            }
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation project(':library')
+}

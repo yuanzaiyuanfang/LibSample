@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LibSample</string>
+
+    <string name="main_tab_info">首页</string>
+</resources>

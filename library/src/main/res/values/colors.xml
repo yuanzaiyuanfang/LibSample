@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#4E85FF</color>
+    <color name="colorPrimaryDark">#4E85FF</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--图片选择用 改色-->
+    <color name="tab_color_true">@color/colorPrimary</color>
+
+
+    <color name="black">#FF000000</color>
+    <color name="black10">#1A000000</color>
+    <color name="black25">#3F000000</color>
+    <color name="black50">#7F000000</color>
+    <color name="black75">#BF000000</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="white25">#3FFFFFFF</color>
+    <color name="white50">#7FFFFFFF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="ripple">#1A000000</color>
+
+    <color name="text_dark">#111111</color>
+    <color name="text_color1">#333333</color>
+    <color name="text_color2">#999999</color>
+    <color name="text_hint">#CCCCCC</color>
+
+    <color name="line_color">#F0F0F0</color>
+    <color name="dray_d1">#D1D1D1</color>
+
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.BaseWebActivity">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/base_web_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText=""
+        app:centerTextColor="@color/text_color1"
+        app:centerTextSize="@dimen/sp18"
+        app:centerType="textView"
+        app:leftImageResource="@mipmap/close_black"
+        app:leftType="imageButton"
+        app:rightType="none"
+        app:titleBarHeight="@dimen/dp44">
+
+    </com.wuhenzhizao.titlebar.widget.CommonTitleBar>
+
+
+    <LinearLayout
+        android:id="@+id/base_web_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+
+</LinearLayout>
