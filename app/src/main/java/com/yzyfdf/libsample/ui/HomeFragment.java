@@ -25,6 +25,8 @@ public class HomeFragment extends BaseFragment {
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
 
+    private boolean isFirst = true;
+
     public static HomeFragment getInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
@@ -43,12 +45,10 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initView(Bundle savedInstanceState) {
 
-        getData();
-
-
     }
 
     private void getData() {
+        isFirst = false;
         ArrayList<Fragment> fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
 
@@ -61,5 +61,14 @@ public class HomeFragment extends BaseFragment {
         mViewPager.setAdapter(tabAdapter);
         mViewPager.setOffscreenPageLimit(fragments.size());
         mTabLayout.setViewPager(mViewPager, titles.toArray(new String[titles.size()]));
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        System.out.println("hidden = " + hidden);
+        if (isFirst && !hidden) {
+            getData();
+        }
     }
 }
