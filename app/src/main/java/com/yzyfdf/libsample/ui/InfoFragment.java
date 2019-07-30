@@ -9,6 +9,8 @@ import com.github.jdsjlzx.ItemDecoration.LuDividerDecoration;
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
 import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
 import com.yzyfdf.library.base.BaseFragment;
+import com.yzyfdf.library.rx.BaseRxSubscriber;
+import com.yzyfdf.library.rx.RxHelper;
 import com.yzyfdf.libsample.R;
 import com.yzyfdf.libsample.adapter.InfoAdapter;
 
@@ -16,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function;
+import retrofit2.HttpException;
 
 /**
  * @author sjj , 2019/4/25 14:17
@@ -134,7 +139,34 @@ public class InfoFragment extends BaseFragment {
             list.add("内容" + (i + 1));
         }
 
-        setData(list);
+        Observable.fromIterable(list)
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        return s + "处理了";
+                    }
+                })
+                .toList()
+                .toObservable()
+                .compose(RxHelper::logAndThread)
+                .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
+                    @Override
+                    protected void servicesError(HttpException e) {
+
+                    }
+
+                    @Override
+                    protected void _onNext(List<String> strings) {
+                        setData(strings);
+                    }
+
+                    @Override
+                    protected void _onError(String message) {
+
+                    }
+                });
+
+
     }
 
     private void setData(List<String> list) {

@@ -8,6 +8,8 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -15,6 +17,48 @@ import io.reactivex.schedulers.Schedulers;
 public class RxHelper {
 
     private static Gson gson = new Gson();
+    private static String sTag = "返回值";
+
+    public static <T> ObservableSource<T> logAndThread(Observable<T> upstream) {
+        return upstream.map(t -> {
+            LogUtils.dTag(sTag, gson.toJson(t));
+            return t;
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+    public static <T> ObservableSource<T> logOnly(Observable<T> upstream) {
+        return upstream.map(t -> {
+            LogUtils.dTag(sTag, gson.toJson(t));
+            return t;
+        });
+    }
+
+    public static <T> ObservableSource<T> threadOnly(Observable<T> upstream) {
+        return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+    public static <T> SingleSource<T> logAndThread(Single<T> upstream){
+        return upstream.map(t -> {
+            LogUtils.dTag(sTag, gson.toJson(t));
+            return t;
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <T> SingleSource<T> logOnly(Single<T> upstream){
+        return upstream.map(t -> {
+            LogUtils.dTag(sTag, gson.toJson(t));
+            return t;
+        });
+    }
+
+    public static <T> SingleSource<T> threadOnly(Single<T> upstream){
+        return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+
 
     /**
      * 对服务器返回数据进行预处理
@@ -63,6 +107,5 @@ public class RxHelper {
                 }
             }
         });
-
     }
 }

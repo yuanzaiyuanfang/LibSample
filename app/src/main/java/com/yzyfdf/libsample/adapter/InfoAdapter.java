@@ -35,7 +35,7 @@ public class InfoAdapter extends BaseRvAdapter<BaseRvHolder, String> {
 
     @Override
     public void onBindVH(BaseRvHolder holder, int position) {
-
+        holder.setText(R.id.tv_lefttext, mList.get(position));
     }
 
 }

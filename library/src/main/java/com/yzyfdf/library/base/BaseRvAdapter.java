@@ -68,15 +68,24 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
         return RvAnimator.getInstance().getAnim(holder.itemView);
     }
 
-    //方法
+    /**
+     * @param list 刷新
+     */
     public void refresh(List<? extends T> list) {
         if (list == null) {
-            list = new ArrayList<>();
+            return;
         }
         refresh(list, true);
     }
 
+    /**
+     * @param list 刷新
+     * @param force 删除原来数据或者增加在最前面
+     */
     public void refresh(List<? extends T> list, boolean force) {
+        if (list == null) {
+            return;
+        }
         if (force) {
             //强制刷新 清楚原来所有数据
             mList.clear();
@@ -87,17 +96,32 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
         notifyDataSetChanged();
     }
 
+    /**
+     * @param list 增加集合
+     */
     public void add(List<? extends T> list) {
+        if (list == null) {
+            return;
+        }
         mList.addAll(list);
         notifyDataSetChanged();
     }
 
+    /**
+     * @param t 增加
+     */
     public void add(T t) {
-        mList.add(t);
-        notifyDataSetChanged();
+        insert(t, mList.size());
     }
 
-    public void add(T t, int i) {
+    /**
+     * @param t 对象
+     * @param i 位置
+     */
+    public void insert(T t, int i) {
+        if (t == null) {
+            return;
+        }
         if (i > mList.size()) {
             i = mList.size();
         }
@@ -119,12 +143,30 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
         notifyItemRangeChanged(index, mList.size() - index);
     }
 
+
+    /**
+     * @param t 对象
+     */
+    public void remove(T t) {
+        if (t == null) {
+            return;
+        }
+        for (int i = 0; i < mList.size(); i++) {
+            if (mList.get(i) == t) {
+                remove(i);
+                return;
+            }
+        }
+    }
+
     public List<T> getList() {
         return mList;
     }
 
 
-    //接口
+    /**
+     * @param <T> 条目被点击
+     */
     public interface OnItemClickListener<T> {
         void onItemClick(T t, int i);
     }
@@ -133,6 +175,9 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
         mOnItemClickListener = onItemClickListener;
     }
 
+    /**
+     * 全部删除，没有条目了
+     */
     public interface OnNoItemCallback {
         void noItem();
     }

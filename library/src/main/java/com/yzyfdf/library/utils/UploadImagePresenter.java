@@ -78,7 +78,7 @@ public class UploadImagePresenter {
 
 //        Api.getApiService(HostType.Industry)
 //                .uploadImages(map, list)
-//                .compose(RxHelper.handleResult())
+//                .compose(RxHelper.logAndThread())
 //                .subscribe(subscriber);
 
     }

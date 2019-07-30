@@ -43,15 +43,18 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     public void onCreate(Bundle savedInstanceState) {
         //通过标签直接生成shape，无需再写shape.xml # https://github.com/JavaNoober/BackgroundLibrary
         BackgroundLibrary.inject(this);
+
         super.onCreate(savedInstanceState);
         mRxManager = new RxManager();
 
         doBeforeSetcontentView();
+
         setContentView(getLayoutId());
         ButterKnife.bind(this);
 
         mContext = this;
         mResources = getResources();
+
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
         if (mPresenter != null) {

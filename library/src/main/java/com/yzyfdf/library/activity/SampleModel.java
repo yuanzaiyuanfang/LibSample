@@ -19,7 +19,7 @@ public class SampleModel implements SampleContract.Model {
 //        RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.toJson(map));
 //        return Api.getInstance().getApiService()
 //                .getBillTJPieMonth(body)
-//                .compose(RxHelper.handleResult())
+//                .compose(RxHelper.logAndThread())
 //                ;
         return null;
     }

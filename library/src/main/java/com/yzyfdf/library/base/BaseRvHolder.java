@@ -24,42 +24,59 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    //根据id找控件
+    /**
+     * @param id
+     * @return 根据id找控件
+     */
     public View getViewById(@IdRes int id) {
         View view = mViewSparseArray.get(id);
         if (view == null) {
             view = itemView.findViewById(id);
             mViewSparseArray.put(id, view);
         }
-        //返回view
         return view;
     }
 
-    //返回TextView
-    public TextView getTextViewById(int id) {
+    /**
+     * @param id
+     * @return 返回TextView
+     */
+    public TextView getTextView(int id) {
         return (TextView) getViewById(id);
     }
 
-    //设置text
+    /**
+     * @param textViewId
+     * @param str 设置text
+     */
     public void setText(int textViewId, CharSequence str) {
         if (TextUtils.isEmpty(str)) {
             str = "";
         }
-        getTextViewById(textViewId).setText(str);
+        getTextView(textViewId).setText(str);
     }
 
-    //EditText
-    public EditText getEditTextById(int id) {
+    /**
+     * @param id
+     * @return EditText
+     */
+    public EditText getEditText(int id) {
         return (EditText) getViewById(id);
     }
 
-    //设置text
+    /**
+     * @param editTextId
+     * @param str 设置text
+     */
     public void setEditText(int editTextId, CharSequence str) {
-        getEditTextById(editTextId).setText(str);
+        getEditText(editTextId).setText(str);
     }
 
-    //返回ImageView
-    public ImageView getImageViewById(int id) {
+    /**
+     * @param id
+     * @return 返回ImageView
+     */
+    public ImageView getImageView(int id) {
         return (ImageView) getViewById(id);
     }
 
@@ -70,7 +87,7 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
         Glide.with(BaseApplication.getAppContext())
                 .load(url)
                 .thumbnail(0.1f)
-                .into(getImageViewById(imageViewId));
+                .into(getImageView(imageViewId));
     }
 
     public void setImage(int imageViewId, String url, @DrawableRes int defaultPic) {
@@ -81,7 +98,7 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
                 .load(url)
                 .apply(RequestOptions.errorOf(defaultPic).placeholder(defaultPic))
                 .thumbnail(0.1f)
-                .into(getImageViewById(imageViewId));
+                .into(getImageView(imageViewId));
     }
 
     public void setCircleImage(int imageViewId, String url) {
@@ -91,29 +108,29 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
         Glide.with(BaseApplication.getAppContext())
                 .load(url)
                 .apply(RequestOptions.circleCropTransform())
-                .into(getImageViewById(imageViewId));
+                .into(getImageView(imageViewId));
     }
 
-    //返回RecyclerView
+    /**
+     * @param id
+     * @return 返回RecyclerView
+     */
     public RecyclerView getRecyclerView(int id) {
         return (RecyclerView) getViewById(id);
     }
 
+    /**
+     * @param id
+     * @param listener 点击事件
+     */
     public void setOnClickListener(int id, View.OnClickListener listener) {
         View view = getViewById(id);
         view.setOnClickListener(listener);
     }
 
-    public void setOnClickListener(int id, String text, View.OnClickListener listener) {
-        TextView view = getTextViewById(id);
-        view.setText(text);
-        view.setOnClickListener(listener);
-    }
-
-    public <D> void refreshData(D data) {
-
-    }
-
+    /**
+     * @param isVisible 显示/隐藏
+     */
     public void setVisibility(boolean isVisible) {
         RecyclerView.LayoutParams param = (RecyclerView.LayoutParams) itemView.getLayoutParams();
         if (isVisible) {
@@ -135,7 +152,16 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
      * @return
      */
     protected String getWidgetContent(TextView view) {
-        return view.getText().toString().replaceAll(" ", "").trim();
+        return view.getText().toString().trim();
     }
+
+
+    /**
+     * @param data 数据处理，子类实现
+     */
+    public <D> void refreshData(D data) {
+
+    }
+
 }
 
