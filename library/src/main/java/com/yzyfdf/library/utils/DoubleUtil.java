@@ -1,6 +1,8 @@
 package com.yzyfdf.library.utils;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.yzyfdf.library.base.BaseApplication;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author sjj , 2019/5/8 16:06
@@ -21,7 +23,7 @@ public class DoubleUtil {
     public static boolean isFastDoubleClick(int millis, String msg) {
         long time = System.currentTimeMillis();
         if (time - lastClickTime < millis) {
-            ToastUtils.showShort(msg);
+            Toasty.warning(BaseApplication.getAppContext(), msg).show();
             return true;
         } else {
             lastClickTime = time;

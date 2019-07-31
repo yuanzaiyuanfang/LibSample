@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.billy.android.loading.Gloading;
-import com.blankj.utilcode.util.ToastUtils;
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
 import com.yzyfdf.library.R;
 import com.yzyfdf.library.rx.RxManager;
@@ -18,6 +17,7 @@ import com.yzyfdf.library.utils.TUtil;
 import com.yzyfdf.library.view.CustomProgressDialog;
 
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
     protected View rootView;
@@ -133,28 +133,35 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
      * 短暂显示Toast提示(来自String)
      **/
     public void showShortToast(String text) {
-        ToastUtils.showShort(text);
+        Toasty.normal(mContext, text).show();
     }
 
     /**
      * 短暂显示Toast提示(id)
      **/
     public void showShortToast(int resId) {
-        ToastUtils.showShort(resId);
+        Toasty.normal(mContext, resId).show();
     }
 
     /**
-     * 长时间显示Toast提示(来自res)
-     **/
-    public void showLongToast(int resId) {
-        ToastUtils.showLong(resId);
-    }
-
-    /**
-     * 长时间显示Toast提示(来自String)
+     * 长提示
      **/
     public void showLongToast(String text) {
-        ToastUtils.showLong(text);
+        Toasty.normal(mContext, text, Toasty.LENGTH_LONG).show();
+    }
+
+    /**
+     * 错误提示
+     */
+    public void showErrTip(String msg) {
+        Toasty.error(mContext, msg).show();
+    }
+
+    /**
+     * 操作成功提示
+     */
+    public void showSuccessTip(String msg) {
+        Toasty.success(mContext, msg).show();
     }
 
     @Override

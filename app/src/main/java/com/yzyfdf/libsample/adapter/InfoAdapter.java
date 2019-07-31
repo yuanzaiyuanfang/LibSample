@@ -35,7 +35,13 @@ public class InfoAdapter extends BaseRvAdapter<BaseRvHolder, String> {
 
     @Override
     public void onBindVH(BaseRvHolder holder, int position) {
-        holder.setText(R.id.tv_lefttext, mList.get(position));
+        String str = mList.get(position);
+        holder.setText(R.id.tv_lefttext, str);
+        holder.itemView.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(str, position);
+            }
+        });
     }
 
 }

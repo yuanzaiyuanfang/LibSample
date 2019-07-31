@@ -9,6 +9,7 @@ import com.github.jdsjlzx.ItemDecoration.LuDividerDecoration;
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
 import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
 import com.yzyfdf.library.base.BaseFragment;
+import com.yzyfdf.library.base.BaseRvAdapter;
 import com.yzyfdf.library.rx.BaseRxSubscriber;
 import com.yzyfdf.library.rx.RxHelper;
 import com.yzyfdf.libsample.R;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import retrofit2.HttpException;
@@ -96,6 +98,23 @@ public class InfoFragment extends BaseFragment {
         mAdapter = new InfoAdapter(mContext, mRxManager);
         LuRecyclerViewAdapter adapter = new LuRecyclerViewAdapter(mAdapter);
         mRecyclerView.setAdapter(adapter);
+
+        mAdapter.setOnItemClickListener(new BaseRvAdapter.OnItemClickListener<String>() {
+            @Override
+            public void onItemClick(String s, int i) {
+                if (i % 5 == 1) {
+                    showShortToast(s);
+                }else if (i % 5 == 2) {
+                    showErrTip(s);
+                }else if (i % 5 == 3) {
+                    showSuccessTip(s);
+                } else if (i % 5 == 4) {
+                    Toasty.warning(mContext, s).show();
+                } else {
+                    Toasty.info(mContext, s).show();
+                }
+            }
+        });
 
         //初始化头部 由外部自定义
         if (mOnInitHeaderListener != null) {
