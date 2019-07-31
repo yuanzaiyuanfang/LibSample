@@ -15,13 +15,18 @@ import com.yzyfdf.library.rx.RxHelper;
 import com.yzyfdf.libsample.R;
 import com.yzyfdf.libsample.adapter.InfoAdapter;
 
+import org.reactivestreams.Publisher;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import es.dmoral.toasty.Toasty;
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 
 /**
@@ -57,7 +62,7 @@ public class InfoFragment extends BaseFragment {
 
 
     private int pageNo = 1;
-    private final int pageSize = 30;
+    private final int pageSize = 20;
     private boolean more = true;
 
     private OnInitHeaderListener mOnInitHeaderListener;
@@ -104,9 +109,9 @@ public class InfoFragment extends BaseFragment {
             public void onItemClick(String s, int i) {
                 if (i % 5 == 1) {
                     showShortToast(s);
-                }else if (i % 5 == 2) {
+                } else if (i % 5 == 2) {
                     showErrTip(s);
-                }else if (i % 5 == 3) {
+                } else if (i % 5 == 3) {
                     showSuccessTip(s);
                 } else if (i % 5 == 4) {
                     Toasty.warning(mContext, s).show();
@@ -154,36 +159,136 @@ public class InfoFragment extends BaseFragment {
         isFirst = false;
 
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < pageSize; i++) {
             list.add("内容" + (i + 1));
         }
 
-        Observable.fromIterable(list)
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String s) throws Exception {
-                        return s + "处理了";
-                    }
-                })
-                .toList()
+        //多线程
+        System.out.println("InfoFragment.getData" + "----" + System.currentTimeMillis());
+        Flowable.just("内容")
+                .flatMap((Function<String, Publisher<String>>) s ->
+                        Flowable.range(1, pageSize)
+                                .map(integer -> {
+                                    System.out.println("integer = " + integer);
+                                    return integer;
+                                })
+//                                .concatMapEager//按顺序执行
+                                .flatMap((Function<Integer, Publisher<String>>) i ->
+                                        Flowable.just(i)
+                                                .observeOn(Schedulers.io())
+                                                .map(index -> {
+                                                    Thread.sleep(300);
+                                                    System.out.println("数据: index = " + index + "，线程：" + Thread.currentThread().getName());
+                                                    if (index == 6) {
+                                                        throw new NullPointerException("报个错");
+                                                    }
+                                                    return s + index;
+                                                })
+                                                .onErrorReturnItem("出错了"))
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map(str -> {
+                                    //每个任务单独更新ui
+                                    System.out.println("ui: s = " + str);
+                                    return str;
+                                })
+                                .observeOn(Schedulers.io()))
+                .toSortedList(String::compareTo)//自己排序
                 .toObservable()
                 .compose(RxHelper::logAndThread)
                 .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                        System.out.println("InfoFragment.onSubscribe" + "----" + System.currentTimeMillis());
+                    }
+
                     @Override
                     protected void servicesError(HttpException e) {
 
                     }
 
+
                     @Override
                     protected void _onNext(List<String> strings) {
+                        System.out.println("InfoFragment._onNext" + "----" + System.currentTimeMillis());
                         setData(strings);
                     }
 
                     @Override
                     protected void _onError(String message) {
-
+                        System.out.println("message = " + message);
                     }
                 });
+
+
+//        Observable.just("内容")
+//                .flatMap(new Function<String, ObservableSource<String>>() {
+//                    @Override
+//                    public ObservableSource<String> apply(String s) throws Exception {
+//                        return Observable.range(1, pageSize)
+//                                .map(new Function<Integer, Integer>() {
+//                                    @Override
+//                                    public Integer apply(Integer integer) throws Exception {
+//                                        System.out.println("integer = " + integer);
+//                                        return integer;
+//                                    }
+//                                })
+////                                .concatMapEager(new Function<Integer, ObservableSource<String>>() {//按顺序
+//                                .flatMap(new Function<Integer, ObservableSource<String>>() {
+//                                    @Override
+//                                    public ObservableSource<String> apply(Integer i) throws Exception {
+//                                        return Observable.just(i)
+//                                                .observeOn(Schedulers.io())
+//                                                .map(new Function<Integer, String>() {
+//                                                    @Override
+//                                                    public String apply(Integer index) throws Exception {
+//                                                        Thread.sleep(300);
+//                                                        System.out.println("数据: index = " + index + "，线程：" + Thread.currentThread().getName());
+//                                                        if (index == 6) {
+//                                                            throw new NullPointerException("报个错");
+//                                                        }
+//                                                        return s + index;
+//                                                    }
+//                                                }).onErrorReturnItem("出错了1");
+//                                    }
+//                                })
+//                                .observeOn(AndroidSchedulers.mainThread())
+//                                .map(new Function<String, String>() {
+//                                    @Override
+//                                    public String apply(String s) throws Exception {
+//                                        //每个任务单独更新ui
+//                                        System.out.println("ui: s = " + s);
+//                                        return s;
+//                                    }
+//                                }).observeOn(Schedulers.io());
+//                    }
+//                }).toList()
+//                .toObservable()
+//                .compose(RxHelper::logAndThread)
+//                .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        super.onSubscribe(d);
+//                        System.out.println("InfoFragment.onSubscribe" + "----" + System.currentTimeMillis());
+//                    }
+//
+//                    @Override
+//                    protected void servicesError(HttpException e) {
+//
+//                    }
+//
+//
+//                    @Override
+//                    protected void _onNext(List<String> strings) {
+//                        System.out.println("InfoFragment._onNext" + "----" + System.currentTimeMillis());
+//                        setData(strings);
+//                    }
+//
+//                    @Override
+//                    protected void _onError(String message) {
+//                        System.out.println("message = " + message);
+//                    }
+//                });
 
 
     }
