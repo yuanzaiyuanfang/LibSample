@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -70,6 +71,8 @@ dependencies {
     api 'com.billy.android:gloading:1.0.0'
     //LRecyclerView
     api 'com.github.jdsjlzx:LRecyclerView:1.5.4.3'
+    //rxpermissions
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
     //图片选择
 //    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     //圆形头像

@@ -4,11 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import androidx.multidex.MultiDex;
+
 import com.billy.android.loading.Gloading;
 import com.blankj.utilcode.util.Utils;
 import com.yzyfdf.library.view.GlobalLoadingAdapter;
-
-import androidx.multidex.MultiDex;
 
 /**
  * APPLICATION

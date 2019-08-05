@@ -1,5 +1,6 @@
 package com.yzyfdf.libsample.ui;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,8 @@ import android.view.View;
 import com.github.jdsjlzx.ItemDecoration.LuDividerDecoration;
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
 import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
+import com.yzyfdf.library.aop.LoginIntercept;
+import com.yzyfdf.library.aop.PermissionsRequest;
 import com.yzyfdf.library.base.BaseFragment;
 import com.yzyfdf.library.base.BaseRvAdapter;
 import com.yzyfdf.library.rx.BaseRxSubscriber;
@@ -21,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import es.dmoral.toasty.Toasty;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -107,16 +109,10 @@ public class InfoFragment extends BaseFragment {
         mAdapter.setOnItemClickListener(new BaseRvAdapter.OnItemClickListener<String>() {
             @Override
             public void onItemClick(String s, int i) {
-                if (i % 5 == 1) {
-                    showShortToast(s);
-                } else if (i % 5 == 2) {
-                    showErrTip(s);
-                } else if (i % 5 == 3) {
-                    showSuccessTip(s);
-                } else if (i % 5 == 4) {
-                    Toasty.warning(mContext, s).show();
+                if (i % 2 == 1) {
+                    needLogin(s, i);
                 } else {
-                    Toasty.info(mContext, s).show();
+                    needPerm(s, i);
                 }
             }
         });
@@ -151,6 +147,15 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
+    @PermissionsRequest(Manifest.permission.CAMERA)
+    private void needPerm(String s, int i) {
+        showShortToast("有权限了");
+    }
+
+    @LoginIntercept
+    private void needLogin(String s, int i) {
+        showShortToast(s);
+    }
 
     /**
      * 获取页面数据
