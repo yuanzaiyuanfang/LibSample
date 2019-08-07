@@ -1,5 +1,7 @@
 package com.yzyfdf.library.aop;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -11,6 +13,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+
+import java.util.Arrays;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import io.reactivex.functions.Consumer;
@@ -41,7 +46,7 @@ public class PermissionAspect {
         } else if (object instanceof Fragment) {
             rxPermissions = new RxPermissions(((Fragment) object));
         } else {
-            return;
+            throw new Exception("只支持Fragment和Activity");
         }
 
         rxPermissions.request(permissionsRequest.value())
@@ -66,7 +71,37 @@ public class PermissionAspect {
                         LogUtils.eTag(TAG, throwable.getMessage());
                     }
                 });
+    }
 
+    /**
+     * 检测权限有没有在清单文件中注册
+     *
+     * @param context            Context
+     * @param requestPermissions 请求的权限组
+     */
+    static void checkPermissions(Context context, List<String> requestPermissions) throws Exception {
+        List<String> manifestPermissions = getManifestPermissions(context);
+        if (manifestPermissions != null && !manifestPermissions.isEmpty()) {
+            for (String permission : requestPermissions) {
+                if (!manifestPermissions.contains(permission)) {
+                    throw new Exception(permission + "  没有在Manifest注册");
+                }
+            }
+        } else {
+            throw new Exception("Manifest中没有危险权限");
+        }
+    }
+
+    /**
+     * 返回应用程序在清单文件中注册的权限
+     */
+    static List<String> getManifestPermissions(Context context) {
+        try {
+            return Arrays.asList(context.getPackageManager().getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_PERMISSIONS).requestedPermissions);
+        } catch (PackageManager.NameNotFoundException ignored) {
+            return null;
+        }
     }
 
 }

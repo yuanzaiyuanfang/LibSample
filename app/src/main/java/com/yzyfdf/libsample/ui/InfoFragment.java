@@ -147,7 +147,9 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
-    @PermissionsRequest(Manifest.permission.CAMERA)
+    @PermissionsRequest(value = {Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE})
     private void needPerm(String s, int i) {
         showShortToast("有权限了");
     }
