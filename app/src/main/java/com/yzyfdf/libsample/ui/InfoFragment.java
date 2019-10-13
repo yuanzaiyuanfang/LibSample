@@ -2,17 +2,16 @@ package com.yzyfdf.libsample.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
-import com.github.jdsjlzx.ItemDecoration.LuDividerDecoration;
-import com.github.jdsjlzx.recyclerview.LuRecyclerView;
-import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.yzyfdf.library.base.BaseFragment;
 import com.yzyfdf.library.base.BaseRvAdapter;
 import com.yzyfdf.library.rx.BaseRxSubscriber;
 import com.yzyfdf.library.rx.RxHelper;
+import com.yzyfdf.library.view.DividerDecoration;
 import com.yzyfdf.libsample.R;
 import com.yzyfdf.libsample.adapter.InfoAdapter;
 
@@ -38,7 +37,7 @@ public class InfoFragment extends BaseFragment {
     @Bind(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
     @Bind(R.id.recyclerView)
-    LuRecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
 
     private InfoAdapter mAdapter;
 
@@ -64,8 +63,6 @@ public class InfoFragment extends BaseFragment {
     private int pageNo = 1;
     private final int pageSize = 20;
     private boolean more = true;
-
-    private OnInitHeaderListener mOnInitHeaderListener;
 
 
     public static InfoFragment getInstance(boolean needLazy) {
@@ -94,15 +91,13 @@ public class InfoFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 pageNo = 1;
-                mRecyclerView.setNoMore(false);
                 getData();
             }
         });
 
-        initLuRecyclerView(mRecyclerView, new LinearLayoutManager(mContext));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter = new InfoAdapter(mContext, mRxManager);
-        LuRecyclerViewAdapter adapter = new LuRecyclerViewAdapter(mAdapter);
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new BaseRvAdapter.OnItemClickListener<String>() {
             @Override
@@ -115,28 +110,13 @@ public class InfoFragment extends BaseFragment {
             }
         });
 
-        //初始化头部 由外部自定义
-        if (mOnInitHeaderListener != null) {
-            View view = mOnInitHeaderListener.onInit(mRecyclerView);
-            adapter.addHeaderView(view);
-        }
 
-        LuDividerDecoration divider = new LuDividerDecoration.Builder(getContext(), adapter)
+        DividerDecoration divider = new DividerDecoration.Builder(getContext())
                 .setHeight(R.dimen.delive_height)
                 .setLeftPadding(R.dimen.dp16).setRightPadding(R.dimen.dp16)
                 .setColorResource(R.color.line_color)
                 .build();
-        mRecyclerView.addItemDecoration(divider);
-
-        mRecyclerView.setOnLoadMoreListener(() -> {
-            if (more) {
-                pageNo++;
-                getData();
-            } else {
-                mRecyclerView.setNoMore(true);
-            }
-        });
-        mRecyclerView.setOnNetWorkErrorListener(() -> getData());
+//        mRecyclerView.addItemDecoration(divider);
 
         isViewed = true;
         //单页面使用时 不需要懒加载
@@ -319,17 +299,13 @@ public class InfoFragment extends BaseFragment {
             mAdapter.add(list);
             mHolder.showLoadSuccess();
             if (list == null || list.size() == 0) {
-                mRecyclerView.setNoMore(true);
             }
         }
 
-        //        more = bean.isMore();
-        mRecyclerView.setNoMore(!more);
     }
 
     private void loadComplete() {
         mSwipeRefresh.setRefreshing(false);
-        mRecyclerView.refreshComplete(pageSize);
     }
 
     /**
@@ -353,20 +329,6 @@ public class InfoFragment extends BaseFragment {
                 mRecyclerView.scrollToPosition(0);
             }
         }
-    }
-
-    /**
-     * 初始化header
-     */
-    public interface OnInitHeaderListener {
-        View onInit(LuRecyclerView recyclerView);
-    }
-
-    /**
-     * activity嵌套时  需要添加头部  用这个
-     */
-    public void setOnInitHeaderListener(OnInitHeaderListener onInitHeaderListener) {
-        mOnInitHeaderListener = onInitHeaderListener;
     }
 
     @Override

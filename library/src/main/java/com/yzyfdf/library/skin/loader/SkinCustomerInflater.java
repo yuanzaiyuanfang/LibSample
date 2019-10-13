@@ -1,9 +1,10 @@
 package com.yzyfdf.library.skin.loader;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.yzyfdf.library.skin.skinview.SkinCommonTabLayout;
 import com.yzyfdf.library.skin.skinview.SkinTitleBar;

@@ -5,19 +5,17 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.app.SkinAppCompatDelegateImpl;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 
-import com.github.jdsjlzx.recyclerview.LuRecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.SkinAppCompatDelegateImpl;
+import androidx.appcompat.widget.Toolbar;
+
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
-import com.yzyfdf.library.R;
 import com.yzyfdf.library.rx.RxManager;
 import com.yzyfdf.library.utils.TUtil;
 import com.yzyfdf.library.view.CustomProgressDialog;
@@ -285,20 +283,6 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
             }
         });
         titleBar.getCenterTextView().setText(title);
-    }
-
-    /**
-     * 默认样式的LuRecyclerView
-     *
-     * @param mRecyclerView
-     * @param layoutManager
-     */
-    protected void initLuRecyclerView(LuRecyclerView mRecyclerView, RecyclerView.LayoutManager layoutManager) {
-//        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
-        mRecyclerView.setFooterViewHint(getResources().getString(R.string.loading),
-                getResources().getString(R.string.load_no_more),
-                getResources().getString(R.string.load_failed));
-        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     @Override

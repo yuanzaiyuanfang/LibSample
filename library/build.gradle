@@ -1,11 +1,10 @@
 apply plugin: 'com.android.library'
 //apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.yzyfdf' // ××××代表你github名字
+group = 'com.github.yzyfdf' // ××××代表你github名字
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-
 
 
     defaultConfig {
@@ -42,18 +41,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    api 'com.android.support.constraint:constraint-layout:1.1.3'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.recyclerview:recyclerview:1.0.0'
+    api 'androidx.annotation:annotation:1.0.0'
+    api 'androidx.appcompat:appcompat:1.0.0'
+    api 'com.google.android.material:material:1.0.0'
 
-    api 'com.android.support:support-v4:' + rootProject.ext.supportLibVersion
-    api 'com.android.support:recyclerview-v7:' + rootProject.ext.supportLibVersion
-    api 'com.android.support:support-annotations:' + rootProject.ext.supportLibVersion
-    api 'com.android.support:design:' + rootProject.ext.supportLibVersion
-    api 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
-
-    api 'androidx.multidex:multidex:2.0.0'//分包
+    api 'androidx.multidex:multidex:2.0.1'//分包
     api 'com.jakewharton:butterknife:7.0.1'
 
     api 'com.squareup.okhttp3:okhttp:3.10.0'
@@ -63,23 +61,25 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.1.12'
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
-    api "com.blankj:utilcode:1.23.7"
-    api 'com.github.bumptech.glide:glide:4.6.1'
+    api 'com.blankj:utilcodex:1.25.9'
+
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     //toast
     api 'com.github.GrenderG:Toasty:1.4.2'
     //tab
-    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    api 'com.flyco.tablayout:FlycoTabLayout_Lib:3.0.0'
     //titlebar
     api 'com.wuhenzhizao:titlebar:1.1.4'
     //webview
     api 'com.just.agentweb:agentweb:4.0.2'
     //shape
-    api 'com.noober.background:core:1.4.4'
+    api 'com.noober.background:core:1.6.0'
     //全局加载
     api 'com.billy.android:gloading:1.0.0'
     //LRecyclerView
-    api 'com.github.jdsjlzx:LRecyclerView:1.5.4.3'
+//    api 'com.github.jdsjlzx:LRecyclerView:1.5.4.3'
     //rxpermissions
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
     //图片选择
@@ -92,12 +92,18 @@ dependencies {
 //    api 'com.makeramen:roundedimageview:2.3.0'
     //升级
 //    api 'com.azhon:appupdate:2.1.0'
+    api 'com.wang.avi:library:2.1.3'
 
 
-    //换肤
-    api 'skin.support:skin-support:3.1.4'                   // skin-support 基础控件支持
-    api 'skin.support:skin-support-design:3.1.4'            // skin-support-design material design 控件支持[可选]
-    api 'skin.support:skin-support-cardview:3.1.4'          // skin-support-cardview CardView 控件支持[可选]
-    api 'skin.support:skin-support-constraint-layout:3.1.4' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 
+    // skin-support
+    api 'skin.support:skin-support:4.0.4'
+    // skin-support 基础控件支持
+    api 'skin.support:skin-support-appcompat:4.0.4'
+    // skin-support-design material design 控件支持[可选]
+    api 'skin.support:skin-support-design:4.0.4'
+    // skin-support-cardview CardView 控件支持[可选]
+//    api 'skin.support:skin-support-cardview:4.0.4'
+    // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
+    api 'skin.support:skin-support-constraint-layout:4.0.4'
 }

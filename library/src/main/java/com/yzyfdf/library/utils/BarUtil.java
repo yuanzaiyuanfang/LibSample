@@ -2,11 +2,10 @@ package com.yzyfdf.library.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.v4.widget.DrawerLayout;
+import androidx.annotation.ColorInt;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;

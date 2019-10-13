@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.jdsjlzx.progressindicator.AVLoadingIndicatorView;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.yzyfdf.library.R;
 
 public class CustomProgressDialog extends Dialog {

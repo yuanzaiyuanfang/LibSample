@@ -1,8 +1,9 @@
 package com.yzyfdf.libsample.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import com.yzyfdf.library.base.BaseRvAdapter;
 import com.yzyfdf.library.base.BaseRvHolder;

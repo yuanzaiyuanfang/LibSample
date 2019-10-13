@@ -1,6 +1,6 @@
 package com.yzyfdf.library.utils;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;

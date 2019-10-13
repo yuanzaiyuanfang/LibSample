@@ -159,6 +159,12 @@
 -dontwarn androidx.**
 
 
+
+# Application classes that will be serialized/deserialized over Gson 下面替换成自己的实体类
+-keep class com.yzyfdf.aitools.model.bean.** { *; }
+
+
+
 #---------------------------------2.第三方库---------------------------------
 #okhttp3
 -dontwarn com.squareup.okhttp3.**
@@ -211,9 +217,6 @@
 -keep class com.google.gson.stream.** { *; }
 -keep class com.google.gson.examples.android.model.** { *; }
 -keep class com.qiancheng.carsmangersystem.**{*;}
-# Application classes that will be serialized/deserialized over Gson 下面替换成自己的实体类
--keep class com.yzyfdf.aitools.model.bean.** { *; }
--keep class com.yzyfdf.library.utils.TitleBarUtil
 
 
 # glide
@@ -223,8 +226,6 @@
   **[] $VALUES;
   public *;
 }
-#glide如果你的API级别<=Android API 27 则需要添加
--dontwarn com.bumptech.glide.load.sourcesBeans.bitmap.VideoDecoder
 # for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 

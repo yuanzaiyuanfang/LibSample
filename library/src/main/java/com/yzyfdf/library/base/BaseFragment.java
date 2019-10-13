@@ -2,16 +2,14 @@ package com.yzyfdf.library.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.billy.android.loading.Gloading;
-import com.github.jdsjlzx.recyclerview.LuRecyclerView;
-import com.yzyfdf.library.R;
 import com.yzyfdf.library.rx.RxManager;
 import com.yzyfdf.library.utils.TUtil;
 import com.yzyfdf.library.view.CustomProgressDialog;
@@ -113,21 +111,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         }
         return dialog.isShowing();
     }
-
-    /**
-     * 默认样式的LuRecyclerView
-     *
-     * @param mRecyclerView
-     * @param layoutManager
-     */
-    protected void initLuRecyclerView(LuRecyclerView mRecyclerView, RecyclerView.LayoutManager layoutManager) {
-//        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
-        mRecyclerView.setFooterViewHint(getResources().getString(R.string.loading),
-                getResources().getString(R.string.load_no_more),
-                getResources().getString(R.string.load_failed));
-        mRecyclerView.setLayoutManager(layoutManager);
-    }
-
 
     /**
      * 短暂显示Toast提示(来自String)
