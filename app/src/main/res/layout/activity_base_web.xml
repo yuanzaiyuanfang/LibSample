@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.BaseWebActivity">
+    tools:context="com.yzyfdf.libsample.ui.BaseWebActivity">
 
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/base_web_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:centerText=""
-        app:centerTextColor="@color/text_color1"
         app:centerTextSize="@dimen/sp18"
         app:centerType="textView"
         app:leftImageResource="@mipmap/close_black"

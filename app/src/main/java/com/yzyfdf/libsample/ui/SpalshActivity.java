@@ -1,11 +1,12 @@
-package com.yzyfdf.library.activity;
+package com.yzyfdf.libsample.ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.yzyfdf.library.R;
 import com.yzyfdf.library.base.BaseActivity;
+import com.yzyfdf.libsample.R;
 
 public class SpalshActivity extends BaseActivity {
 
@@ -26,13 +27,13 @@ public class SpalshActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         init();
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-//                IntentGo.getIt().goHomeActivity(SpalshActivity.this);
-                finish();
-            }
-        }, 1000);
+        startActivity(new Intent(mContext, MainActivity.class));
+        finish();
+//        getWindow().getDecorView().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//            }
+//        }, 1000);
     }
 
     /**

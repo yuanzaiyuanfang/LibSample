@@ -5,15 +5,17 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.app.SkinAppCompatDelegateImpl;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
-import com.noober.background.BackgroundLibrary;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yzyfdf.library.R;
 import com.yzyfdf.library.rx.RxManager;
@@ -42,7 +44,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     public void onCreate(Bundle savedInstanceState) {
         //通过标签直接生成shape，无需再写shape.xml # https://github.com/JavaNoober/BackgroundLibrary
-        BackgroundLibrary.inject(this);
+//        BackgroundLibrary.inject2(this);
 
         super.onCreate(savedInstanceState);
         mRxManager = new RxManager();
@@ -292,7 +294,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
      * @param layoutManager
      */
     protected void initLuRecyclerView(LuRecyclerView mRecyclerView, RecyclerView.LayoutManager layoutManager) {
-        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
+//        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
         mRecyclerView.setFooterViewHint(getResources().getString(R.string.loading),
                 getResources().getString(R.string.load_no_more),
                 getResources().getString(R.string.load_failed));
@@ -323,4 +325,9 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         ButterKnife.unbind(this);
     }
 
+    @NonNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        return SkinAppCompatDelegateImpl.get(this, this);
+    }
 }

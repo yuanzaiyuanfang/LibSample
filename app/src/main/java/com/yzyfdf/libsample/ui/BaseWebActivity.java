@@ -1,4 +1,4 @@
-package com.yzyfdf.library.activity;
+package com.yzyfdf.libsample.ui;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
@@ -13,20 +14,20 @@ import android.widget.LinearLayout;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
-import com.yzyfdf.library.R;
 import com.yzyfdf.library.base.BaseActivity;
+import com.yzyfdf.libsample.R;
 
 /**
  * @author sjj , 2019/4/24 13:40
  * //嵌套网页
  */
-public abstract class BaseWebActivity extends BaseActivity {
+public class BaseWebActivity extends BaseActivity {
 
     protected CommonTitleBar mTitlebar;
     protected LinearLayout mContent;
 
     protected AgentWeb.PreAgentWeb mPreAgentWeb;
-    protected AgentWeb mAgentWeb;// = mPreAgentWeb.go(url);子类自行实现
+    protected AgentWeb mAgentWeb;
 
     protected WebViewClient mWebViewClient = new WebViewClient() {
 
@@ -67,6 +68,11 @@ public abstract class BaseWebActivity extends BaseActivity {
     }
 
     @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
     public void initView(Bundle savedInstanceState) {
 
         mPreAgentWeb = AgentWeb.with(this)
@@ -80,10 +86,23 @@ public abstract class BaseWebActivity extends BaseActivity {
                 .createAgentWeb()
                 .ready();
 
+        String url = getIntent().getStringExtra("url");
+        mAgentWeb = mPreAgentWeb.go(url);
+
+        WebSettings webSettings = mAgentWeb.getAgentWebSettings().getWebSettings();
+//        webSettings.setUserAgentString("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
+        webSettings.setUseWideViewPort(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+//        webSettings.setLoadWithOverviewMode(true);
+
         init();
     }
 
-    protected abstract void init();
+    protected void init() {
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

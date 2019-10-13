@@ -1,6 +1,6 @@
 package com.yzyfdf.libsample.ui;
 
-import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +9,6 @@ import android.view.View;
 import com.github.jdsjlzx.ItemDecoration.LuDividerDecoration;
 import com.github.jdsjlzx.recyclerview.LuRecyclerView;
 import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
-import com.yzyfdf.library.aop.LoginIntercept;
-import com.yzyfdf.library.aop.PermissionsRequest;
 import com.yzyfdf.library.base.BaseFragment;
 import com.yzyfdf.library.base.BaseRvAdapter;
 import com.yzyfdf.library.rx.BaseRxSubscriber;
@@ -147,16 +145,22 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
-    @PermissionsRequest(value = {Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE})
+//    @PermissionsRequest(value = {Manifest.permission.CAMERA,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//            Manifest.permission.READ_PHONE_STATE})
     private void needPerm(String s, int i) {
-        showShortToast("有权限了");
+        showShortToast("夜间模式");
+        startActivity(new Intent(mContext, BaseWebActivity.class)
+                .putExtra("url", "https://view.officeapps.live.com/op/view.aspx?src=https://oss.neets.cc/test/xx.docx"));
+//        Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36
+//        Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36
     }
 
-    @LoginIntercept
+//    @LoginIntercept
     private void needLogin(String s, int i) {
-        showShortToast(s);
+        showShortToast("默认主题");
+        startActivity(new Intent(mContext, BaseWebActivity.class)
+                .putExtra("url", "https://view.officeapps.live.com/op/view.aspx?src=https://oss.neets.cc/test/1.xlsx"));
     }
 
     /**
@@ -179,7 +183,7 @@ public class InfoFragment extends BaseFragment {
                                     System.out.println("integer = " + integer);
                                     return integer;
                                 })
-//                                .concatMapEager//按顺序执行
+                                //                                .concatMapEager//按顺序执行
                                 .flatMap((Function<Integer, Publisher<String>>) i ->
                                         Flowable.just(i)
                                                 .observeOn(Schedulers.io())
@@ -228,74 +232,74 @@ public class InfoFragment extends BaseFragment {
                 });
 
 
-//        Observable.just("内容")
-//                .flatMap(new Function<String, ObservableSource<String>>() {
-//                    @Override
-//                    public ObservableSource<String> apply(String s) throws Exception {
-//                        return Observable.range(1, pageSize)
-//                                .map(new Function<Integer, Integer>() {
-//                                    @Override
-//                                    public Integer apply(Integer integer) throws Exception {
-//                                        System.out.println("integer = " + integer);
-//                                        return integer;
-//                                    }
-//                                })
-////                                .concatMapEager(new Function<Integer, ObservableSource<String>>() {//按顺序
-//                                .flatMap(new Function<Integer, ObservableSource<String>>() {
-//                                    @Override
-//                                    public ObservableSource<String> apply(Integer i) throws Exception {
-//                                        return Observable.just(i)
-//                                                .observeOn(Schedulers.io())
-//                                                .map(new Function<Integer, String>() {
-//                                                    @Override
-//                                                    public String apply(Integer index) throws Exception {
-//                                                        Thread.sleep(300);
-//                                                        System.out.println("数据: index = " + index + "，线程：" + Thread.currentThread().getName());
-//                                                        if (index == 6) {
-//                                                            throw new NullPointerException("报个错");
-//                                                        }
-//                                                        return s + index;
-//                                                    }
-//                                                }).onErrorReturnItem("出错了1");
-//                                    }
-//                                })
-//                                .observeOn(AndroidSchedulers.mainThread())
-//                                .map(new Function<String, String>() {
-//                                    @Override
-//                                    public String apply(String s) throws Exception {
-//                                        //每个任务单独更新ui
-//                                        System.out.println("ui: s = " + s);
-//                                        return s;
-//                                    }
-//                                }).observeOn(Schedulers.io());
-//                    }
-//                }).toList()
-//                .toObservable()
-//                .compose(RxHelper::logAndThread)
-//                .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//                        super.onSubscribe(d);
-//                        System.out.println("InfoFragment.onSubscribe" + "----" + System.currentTimeMillis());
-//                    }
-//
-//                    @Override
-//                    protected void servicesError(HttpException e) {
-//
-//                    }
-//
-//
-//                    @Override
-//                    protected void _onNext(List<String> strings) {
-//                        System.out.println("InfoFragment._onNext" + "----" + System.currentTimeMillis());
-//                        setData(strings);
-//                    }
-//
-//                    @Override
-//                    protected void _onError(String message) {
-//                        System.out.println("message = " + message);
-//                    }
-//                });
+        //        Observable.just("内容")
+        //                .flatMap(new Function<String, ObservableSource<String>>() {
+        //                    @Override
+        //                    public ObservableSource<String> apply(String s) throws Exception {
+        //                        return Observable.range(1, pageSize)
+        //                                .map(new Function<Integer, Integer>() {
+        //                                    @Override
+        //                                    public Integer apply(Integer integer) throws Exception {
+        //                                        System.out.println("integer = " + integer);
+        //                                        return integer;
+        //                                    }
+        //                                })
+        ////                                .concatMapEager(new Function<Integer, ObservableSource<String>>() {//按顺序
+        //                                .flatMap(new Function<Integer, ObservableSource<String>>() {
+        //                                    @Override
+        //                                    public ObservableSource<String> apply(Integer i) throws Exception {
+        //                                        return Observable.just(i)
+        //                                                .observeOn(Schedulers.io())
+        //                                                .map(new Function<Integer, String>() {
+        //                                                    @Override
+        //                                                    public String apply(Integer index) throws Exception {
+        //                                                        Thread.sleep(300);
+        //                                                        System.out.println("数据: index = " + index + "，线程：" + Thread.currentThread().getName());
+        //                                                        if (index == 6) {
+        //                                                            throw new NullPointerException("报个错");
+        //                                                        }
+        //                                                        return s + index;
+        //                                                    }
+        //                                                }).onErrorReturnItem("出错了1");
+        //                                    }
+        //                                })
+        //                                .observeOn(AndroidSchedulers.mainThread())
+        //                                .map(new Function<String, String>() {
+        //                                    @Override
+        //                                    public String apply(String s) throws Exception {
+        //                                        //每个任务单独更新ui
+        //                                        System.out.println("ui: s = " + s);
+        //                                        return s;
+        //                                    }
+        //                                }).observeOn(Schedulers.io());
+        //                    }
+        //                }).toList()
+        //                .toObservable()
+        //                .compose(RxHelper::logAndThread)
+        //                .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
+        //                    @Override
+        //                    public void onSubscribe(Disposable d) {
+        //                        super.onSubscribe(d);
+        //                        System.out.println("InfoFragment.onSubscribe" + "----" + System.currentTimeMillis());
+        //                    }
+        //
+        //                    @Override
+        //                    protected void servicesError(HttpException e) {
+        //
+        //                    }
+        //
+        //
+        //                    @Override
+        //                    protected void _onNext(List<String> strings) {
+        //                        System.out.println("InfoFragment._onNext" + "----" + System.currentTimeMillis());
+        //                        setData(strings);
+        //                    }
+        //
+        //                    @Override
+        //                    protected void _onError(String message) {
+        //                        System.out.println("message = " + message);
+        //                    }
+        //                });
 
 
     }
@@ -319,7 +323,7 @@ public class InfoFragment extends BaseFragment {
             }
         }
 
-//        more = bean.isMore();
+        //        more = bean.isMore();
         mRecyclerView.setNoMore(!more);
     }
 

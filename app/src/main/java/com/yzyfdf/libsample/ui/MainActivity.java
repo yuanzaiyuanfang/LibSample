@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Integer> mIconSelectIds = new ArrayList<>();
 
     private HomeFragment mHomeFragment;
+    private ThemeFragment themeFragment;
 
     @Override
     public int getLayoutId() {
@@ -49,6 +50,14 @@ public class MainActivity extends BaseActivity {
             mHomeFragment = HomeFragment.getInstance();
             fragmentList.add(mHomeFragment);
             titleList.add(mResources.getString(R.string.main_tab_info));
+            mIconSelectIds.add(R.mipmap.ic_launcher);
+            mIconUnselectIds.add(R.mipmap.ic_launcher_round);
+        }
+
+        if (themeFragment == null) {
+            themeFragment = new ThemeFragment();
+            fragmentList.add(themeFragment);
+            titleList.add(mResources.getString(R.string.main_tab_theme));
             mIconSelectIds.add(R.mipmap.ic_launcher);
             mIconUnselectIds.add(R.mipmap.ic_launcher_round);
         }

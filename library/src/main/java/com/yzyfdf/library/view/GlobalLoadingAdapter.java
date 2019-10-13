@@ -1,7 +1,7 @@
 package com.yzyfdf.library.view;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +58,7 @@ public class GlobalLoadingAdapter implements Gloading.Adapter {
             mImageView = findViewById(R.id.image);
             mTextView = findViewById(R.id.text);
             this.mRetryTask = retryTask;
-            setBackgroundColor(ContextCompat.getColor(context, R.color.line_color));
+            setBackgroundColor(Color.parseColor("#eeeeee"));
         }
 
         public void setMsgViewVisibility(boolean visible) {

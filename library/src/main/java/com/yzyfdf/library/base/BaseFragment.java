@@ -121,7 +121,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
      * @param layoutManager
      */
     protected void initLuRecyclerView(LuRecyclerView mRecyclerView, RecyclerView.LayoutManager layoutManager) {
-        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
+//        mRecyclerView.setFooterViewColor(R.color.text_color2, R.color.text_color2, R.color.white);
         mRecyclerView.setFooterViewHint(getResources().getString(R.string.loading),
                 getResources().getString(R.string.load_no_more),
                 getResources().getString(R.string.load_failed));
