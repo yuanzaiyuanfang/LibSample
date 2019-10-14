@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 import androidx.appcompat.widget.Toolbar;
 
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -309,9 +306,9 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         ButterKnife.unbind(this);
     }
 
-    @NonNull
-    @Override
-    public AppCompatDelegate getDelegate() {
-        return SkinAppCompatDelegateImpl.get(this, this);
-    }
+//    @NonNull
+//    @Override
+//    public AppCompatDelegate getDelegate() {
+//        return SkinAppCompatDelegateImpl.get(this, this);
+//    }
 }

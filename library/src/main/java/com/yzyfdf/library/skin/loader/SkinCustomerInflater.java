@@ -18,6 +18,7 @@ import skin.support.app.SkinLayoutInflater;
 public class SkinCustomerInflater implements SkinLayoutInflater {
     @Override
     public View createView(@NonNull Context context, String name, @NonNull AttributeSet attrs) {
+        System.out.println("name = " + name);
         View view = null;
         switch (name) {
             case "com.wuhenzhizao.titlebar.widget.CommonTitleBar":
