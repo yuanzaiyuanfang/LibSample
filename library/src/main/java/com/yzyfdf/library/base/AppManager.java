@@ -11,8 +11,8 @@ import java.util.Stack;
  * activity管理
  */
 public class AppManager {
-    private static Stack<Activity> activityStack;
-    private volatile static AppManager instance;
+    private static          Stack<Activity> activityStack;
+    private volatile static AppManager      instance;
 
     private AppManager() {
 
@@ -39,10 +39,20 @@ public class AppManager {
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
-        System.out.println("addActivity = " + activity.getClass().getSimpleName());
+    }
+
+    /**
+     * 删除已经finish的activity
+     *
+     * @param activity
+     */
+    public void removeActivity(Activity activity) {
+        if (activity != null) {
+            activityStack.remove(activity);
+        }
     }
 
     /**
@@ -82,8 +92,9 @@ public class AppManager {
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
-            System.out.println("finishActivity = " + activity.getClass().getSimpleName());
+            activityStack.remove(activity);
             activity.finish();
+            activity = null;
         }
     }
 
@@ -105,17 +116,17 @@ public class AppManager {
     /**
      * 结束其他所有Activity
      */
-//    public void finishOtherActivitys(Class<?> cls) {
-//        if (cls == null) {
-//            return;
-//        }
-//        for (int i = 0, size = activityStack.size(); i < size; i++) {
-//            Activity a = activityStack.get(i);
-//            if (null != a && a.getClass() != cls) {
-//                a.finish();
-//            }
-//        }
-//    }
+    public void finishOtherActivitys(Class<?> cls) {
+        if (cls == null) {
+            return;
+        }
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            Activity a = activityStack.get(i);
+            if (null != a && a.getClass() != cls) {
+                a.finish();
+            }
+        }
+    }
 
     /**
      * 结束所有Activity

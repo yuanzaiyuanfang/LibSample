@@ -3,18 +3,22 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionName rootProject.ext.versionName
         versionCode rootProject.ext.versionCode
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
         multiDexEnabled true
         flavorDimensions "default"
 
-        android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 
         /**
          * 此处配置数据用于AndroidManifest文件调用
@@ -65,10 +69,10 @@ android {
 
     productFlavors {
         tongyong {
-            manifestPlaceholders = [APP_CHANNEL: "a-tongyong"]
+            manifestPlaceholders = [APP_CHANNEL: "tongyong"]
         }
         huawei {
-            manifestPlaceholders = [APP_CHANNEL: "a-huawei"]
+            manifestPlaceholders = [APP_CHANNEL: "huawei"]
         }
     }
 
@@ -111,4 +115,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation project(':library')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
+    //webview
+    implementation 'com.just.agentweb:agentweb:4.0.2'
 }

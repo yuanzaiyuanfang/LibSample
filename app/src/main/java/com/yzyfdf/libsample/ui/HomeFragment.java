@@ -1,6 +1,5 @@
 package com.yzyfdf.libsample.ui;
 
-import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -12,7 +11,7 @@ import com.yzyfdf.libsample.adapter.TabAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * @author sjj , 2019/6/5 16:26
@@ -20,9 +19,9 @@ import butterknife.Bind;
  */
 public class HomeFragment extends BaseFragment {
 
-    @Bind(R.id.tabLayout)
+    @BindView(R.id.tabLayout)
     SlidingTabLayout mTabLayout;
-    @Bind(R.id.viewPager)
+    @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
     private boolean isFirst = true;
@@ -43,7 +42,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
+    protected void initView() {
 
     }
 

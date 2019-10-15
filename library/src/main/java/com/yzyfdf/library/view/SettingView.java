@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.appcompat.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,6 +12,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.yzyfdf.library.R;
 
@@ -219,7 +220,7 @@ public class SettingView extends RelativeLayout {
     }
 
     private void initView(Context context) {
-        mView = View.inflate(context, R.layout.setting_item, this);
+        mView = View.inflate(context, R.layout.layout_setting_view, this);
         mRootLayout = (RelativeLayout) mView.findViewById(R.id.rootLayout);
         mUnderLine = (View) mView.findViewById(R.id.underline);
         mTvLeftText = (TextView) mView.findViewById(R.id.tv_lefttext);

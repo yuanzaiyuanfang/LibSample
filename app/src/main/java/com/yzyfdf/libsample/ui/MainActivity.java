@@ -1,6 +1,5 @@
 package com.yzyfdf.libsample.ui;
 
-import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -14,11 +13,11 @@ import com.yzyfdf.libsample.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.tabLayout)
+    @BindView(R.id.tabLayout)
     CommonTabLayout tabLayout;
 
     private ArrayList<Fragment> fragmentList = new ArrayList<>();
@@ -27,7 +26,6 @@ public class MainActivity extends BaseActivity {
     private ArrayList<Integer> mIconSelectIds = new ArrayList<>();
 
     private HomeFragment mHomeFragment;
-    private ThemeFragment themeFragment;
 
     @Override
     public int getLayoutId() {
@@ -40,7 +38,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    public void initView() {
         initFragment();
         initTabLayout();
     }
@@ -53,15 +51,6 @@ public class MainActivity extends BaseActivity {
             mIconSelectIds.add(R.mipmap.ic_launcher);
             mIconUnselectIds.add(R.mipmap.ic_launcher_round);
         }
-
-        if (themeFragment == null) {
-            themeFragment = new ThemeFragment();
-            fragmentList.add(themeFragment);
-            titleList.add(mResources.getString(R.string.main_tab_theme));
-            mIconSelectIds.add(R.mipmap.ic_launcher);
-            mIconUnselectIds.add(R.mipmap.ic_launcher_round);
-        }
-
     }
 
     private void initTabLayout() {

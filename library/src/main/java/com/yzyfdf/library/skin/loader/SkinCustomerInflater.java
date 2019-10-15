@@ -7,6 +7,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.yzyfdf.library.skin.skinview.SkinCommonTabLayout;
+import com.yzyfdf.library.skin.skinview.SkinGlobalLoadingStatusView;
+import com.yzyfdf.library.skin.skinview.SkinSegmentTabLayout;
+import com.yzyfdf.library.skin.skinview.SkinSettingView;
+import com.yzyfdf.library.skin.skinview.SkinSlidingTabLayout;
 import com.yzyfdf.library.skin.skinview.SkinTitleBar;
 
 import skin.support.app.SkinLayoutInflater;
@@ -16,6 +20,12 @@ import skin.support.app.SkinLayoutInflater;
  * 描述
  */
 public class SkinCustomerInflater implements SkinLayoutInflater {
+    /**
+     * @param context
+     * @param name
+     * @param attrs
+     * @return
+     */
     @Override
     public View createView(@NonNull Context context, String name, @NonNull AttributeSet attrs) {
         System.out.println("name = " + name);
@@ -24,18 +34,26 @@ public class SkinCustomerInflater implements SkinLayoutInflater {
             case "com.wuhenzhizao.titlebar.widget.CommonTitleBar":
                 view = new SkinTitleBar(context, attrs);
                 break;
-//            case "com.flyco.tablayout.SlidingTabLayout":
-//                view = new SkinSlidingTabLayout(context, attrs);
-//                break;
+
+            case "com.flyco.tablayout.SlidingTabLayout":
+                view = new SkinSlidingTabLayout(context, attrs);
+                break;
             case "com.flyco.tablayout.CommonTabLayout":
                 view = new SkinCommonTabLayout(context, attrs);
                 break;
-//            case "com.flyco.tablayout.SegmentTabLayout":
-//                view = new SkinSegmentTabLayout(context, attrs);
-//                break;
-//            case "com.flyco.tablayout.widget.MsgView":
-//                view = new SkinMsgView(context, attrs);
-//                break;
+            case "com.flyco.tablayout.SegmentTabLayout":
+                view = new SkinSegmentTabLayout(context, attrs);
+                break;
+            //            case "com.flyco.tablayout.widget.MsgView":
+            //                view = new SkinMsgView(context, attrs);
+            //                break;
+
+            case "com.yzyfdf.library.view.SettingView":
+                view = new SkinSettingView(context, attrs);
+                break;
+            case "com.yzyfdf.library.view.globalloading.GlobalLoadingStatusView":
+                view = new SkinGlobalLoadingStatusView(context, attrs);
+                break;
         }
         return view;
     }

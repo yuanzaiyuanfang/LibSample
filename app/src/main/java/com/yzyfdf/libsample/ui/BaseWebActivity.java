@@ -1,7 +1,5 @@
 package com.yzyfdf.libsample.ui;
 
-import android.os.Bundle;
-import androidx.core.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -10,6 +8,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+
+import androidx.core.content.ContextCompat;
 
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
@@ -73,7 +73,7 @@ public class BaseWebActivity extends BaseActivity {
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    public void initView() {
 
         mPreAgentWeb = AgentWeb.with(this)
                 .setAgentWebParent(mContent, new LinearLayout.LayoutParams(-1, -1))

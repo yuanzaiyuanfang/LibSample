@@ -27,6 +27,7 @@
 
         </activity>
         <activity android:name=".ui.BaseWebActivity" />
+        <activity android:name=".ui.ThemeActivity" />
     </application>
 
 </manifest>

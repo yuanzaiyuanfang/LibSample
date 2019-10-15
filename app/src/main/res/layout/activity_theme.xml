@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dp24"
             android:text="标题"
-            android:textColor="@color/text_color1"
+            android:textColor="@color/text1"
             android:textSize="@dimen/sp20" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dp24"
             android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-            android:textColor="@color/text_color2"
+            android:textColor="@color/text3"
             android:textSize="@dimen/sp16" />
 
 
@@ -53,16 +53,24 @@
             android:background="@color/white"
             android:padding="@dimen/dp24"
             android:text="切换"
-            android:textColor="@color/text_color1" />
+            android:textColor="@color/split_bar_color" />
 
         <TextView
             android:id="@+id/moren"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/split_bar_color"
             android:padding="@dimen/dp24"
             android:text="默认"
-            android:textColor="@color/text_color1" />
+            android:textColor="@color/text1" />
+
+        <com.yzyfdf.library.view.SettingView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp44"
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@color/bg_light"
+            app:l_text_color="@color/text1"
+            app:left_text="ssssssssssssssssssss" />
 
     </LinearLayout>
 

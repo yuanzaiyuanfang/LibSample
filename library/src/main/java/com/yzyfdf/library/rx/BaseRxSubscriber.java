@@ -11,20 +11,21 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
+
 public abstract class BaseRxSubscriber<T> implements Observer<T> {
 
     protected Context mContext;
     private RxManager mRxManager;
-    boolean showDialog = true;
+    private   boolean   showDialog = true;
     private String msg;
 
     private CustomProgressDialog dialog;
 
     /**
-     * 不需要显示
+     * 不需要显示进度框
      */
-    public BaseRxSubscriber(Context context, RxManager rxManager) {
-        this(context, rxManager, false);
+    public BaseRxSubscriber(RxManager rxManager) {
+        this(null, rxManager, false);
     }
 
     /**

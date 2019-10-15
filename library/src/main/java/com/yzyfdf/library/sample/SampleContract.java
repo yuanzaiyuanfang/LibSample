@@ -1,4 +1,4 @@
-package com.yzyfdf.library.activity;
+package com.yzyfdf.library.sample;
 
 
 import com.yzyfdf.library.base.BaseModel;

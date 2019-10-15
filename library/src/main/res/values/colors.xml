@@ -5,4 +5,34 @@
     <color name="colorPrimaryDark">#4E85FF</color>
     <color name="colorAccent">#FF4081</color>
 
+
+
+    <!--文字-->
+    <color name="text1">#333333</color>
+    <color name="text2">#666666</color>
+    <color name="text3">#999999</color>
+    <color name="text_hint">#CCCCCC</color>
+    <color name="text_light">#FFFFFF</color>
+
+    <!--分割线-->
+    <color name="line_color">#EEEEEE</color>
+    <color name="strock_color">#DDDDDD</color>
+    <color name="split_bar_color">#F5F5F5</color>
+
+    <!--主色-->
+    <color name="main_color">#53B4B3</color>
+    <color name="main_color_dark">#42a2a2</color>
+    <color name="main_color_light">#8053B4B3</color>
+    <color name="main_color_shadow">#8053B4B3</color>
+    <color name="main_notice">#FFFF942F</color>
+    <color name="main_error">#FFF45B5B</color>
+    <color name="main_bar_light">#F8F8F8</color>
+
+    <!--背景-->
+    <color name="bg_light">#F9F9F9</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="unenable">#F5F5F5</color>
+    <color name="ripple">#F0F0F0</color>
+
+
 </resources>

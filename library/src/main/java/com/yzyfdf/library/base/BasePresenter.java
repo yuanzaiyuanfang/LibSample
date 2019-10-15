@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.yzyfdf.library.rx.RxManager;
 
+import es.dmoral.toasty.Toasty;
+
 public abstract class BasePresenter<T,E>{
     public Context mContext;
     public E mModel;
@@ -19,5 +21,9 @@ public abstract class BasePresenter<T,E>{
     }
     public void onDestroy() {
         mRxManager.clear();
+    }
+
+    protected void showErrorTip(String msg) {
+        Toasty.error(mContext, msg).show();
     }
 }

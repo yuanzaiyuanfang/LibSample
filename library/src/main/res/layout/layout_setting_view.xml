@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="@drawable/ripple_bkg_white"
+    android:background="@color/bg_light"
     android:clickable="true"
     android:gravity="center_vertical">
 

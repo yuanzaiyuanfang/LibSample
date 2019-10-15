@@ -1,9 +1,6 @@
-package com.yzyfdf.libsample.api;
+package com.yzyfdf.library.rx;
 
 import android.content.Context;
-
-import com.yzyfdf.library.rx.BaseRxSubscriber;
-import com.yzyfdf.library.rx.RxManager;
 
 import retrofit2.HttpException;
 

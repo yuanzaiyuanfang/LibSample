@@ -1,7 +1,6 @@
 package com.yzyfdf.libsample.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,7 @@ import org.reactivestreams.Publisher;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -34,9 +33,9 @@ import retrofit2.HttpException;
  */
 public class InfoFragment extends BaseFragment {
 
-    @Bind(R.id.swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     private InfoAdapter mAdapter;
@@ -82,7 +81,7 @@ public class InfoFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
+    protected void initView() {
         pageNo = 1;
         mHolder.showLoading();
 
@@ -116,7 +115,7 @@ public class InfoFragment extends BaseFragment {
                 .setLeftPadding(R.dimen.dp16).setRightPadding(R.dimen.dp16)
                 .setColorResource(R.color.line_color)
                 .build();
-//        mRecyclerView.addItemDecoration(divider);
+        //        mRecyclerView.addItemDecoration(divider);
 
         isViewed = true;
         //单页面使用时 不需要懒加载
@@ -125,22 +124,20 @@ public class InfoFragment extends BaseFragment {
         }
     }
 
-//    @PermissionsRequest(value = {Manifest.permission.CAMERA,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.READ_PHONE_STATE})
+    //    @PermissionsRequest(value = {Manifest.permission.CAMERA,
+    //            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    //            Manifest.permission.READ_PHONE_STATE})
     private void needPerm(String s, int i) {
         showShortToast("夜间模式");
         startActivity(new Intent(mContext, BaseWebActivity.class)
                 .putExtra("url", "https://view.officeapps.live.com/op/view.aspx?src=https://oss.neets.cc/test/xx.docx"));
-//        Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36
-//        Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36
+        //        Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36
+        //        Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36
     }
 
-//    @LoginIntercept
+    //    @LoginIntercept
     private void needLogin(String s, int i) {
-        showShortToast("默认主题");
-        startActivity(new Intent(mContext, BaseWebActivity.class)
-                .putExtra("url", "https://view.officeapps.live.com/op/view.aspx?src=https://oss.neets.cc/test/1.xlsx"));
+        startActivity(new Intent(mContext, ThemeActivity.class));
     }
 
     /**
@@ -186,7 +183,7 @@ public class InfoFragment extends BaseFragment {
                 .toSortedList(String::compareTo)//自己排序
                 .toObservable()
                 .compose(RxHelper::logAndThread)
-                .subscribe(new BaseRxSubscriber<List<String>>(mContext, mRxManager) {
+                .subscribe(new BaseRxSubscriber<List<String>>(mRxManager) {
                     @Override
                     public void onSubscribe(Disposable d) {
                         super.onSubscribe(d);

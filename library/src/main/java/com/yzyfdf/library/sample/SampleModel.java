@@ -1,15 +1,11 @@
-package com.yzyfdf.library.activity;
+package com.yzyfdf.library.sample;
 
 
 import com.yzyfdf.library.rx.BaseRespose;
 
 import io.reactivex.Observable;
 
-/**
- *
- * @author MLRC-iOS-CI
- * @date 2018/5/8
- */
+
 public class SampleModel implements SampleContract.Model {
 
     @Override

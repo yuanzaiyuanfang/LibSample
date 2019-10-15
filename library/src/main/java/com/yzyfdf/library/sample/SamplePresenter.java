@@ -1,14 +1,11 @@
-package com.yzyfdf.library.activity;
+package com.yzyfdf.library.sample;
 
 import com.yzyfdf.library.rx.BaseRespose;
 import com.yzyfdf.library.rx.BaseRxSubscriber;
 
 import retrofit2.HttpException;
 
-/**
- * @author MLRC-iOS-CI
- * @date 2018/5/8
- */
+
 public class SamplePresenter extends SampleContract.Presenter {
 
     @Override
@@ -18,7 +15,7 @@ public class SamplePresenter extends SampleContract.Presenter {
 
     @Override
     public void get(String s) {
-        mModel.get(s).subscribe(new BaseRxSubscriber<BaseRespose>(mContext, mRxManager) {
+        mModel.get(s).subscribe(new BaseRxSubscriber<BaseRespose>(mRxManager) {
             @Override
             protected void servicesError(HttpException e) {
 
@@ -31,7 +28,7 @@ public class SamplePresenter extends SampleContract.Presenter {
 
             @Override
             protected void _onError(String message) {
-                mView.returnFail(message);
+                showErrorTip(message);
             }
         });
     }

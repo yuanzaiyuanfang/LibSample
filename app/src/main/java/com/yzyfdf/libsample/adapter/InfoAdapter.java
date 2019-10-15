@@ -31,7 +31,7 @@ public class InfoAdapter extends BaseRvAdapter<BaseRvHolder, String> {
     @NonNull
     @Override
     public BaseRvHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new BaseRvHolder(mInflater.inflate(R.layout.setting_item, viewGroup, false));
+        return new BaseRvHolder(mInflater.inflate(R.layout.layout_setting_view, viewGroup, false));
     }
 
     @Override

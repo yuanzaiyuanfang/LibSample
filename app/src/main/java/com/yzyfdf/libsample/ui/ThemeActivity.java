@@ -1,9 +1,8 @@
 package com.yzyfdf.libsample.ui;
 
-import android.os.Bundle;
 import android.view.View;
 
-import com.yzyfdf.library.base.BaseFragment;
+import com.yzyfdf.library.base.BaseActivity;
 import com.yzyfdf.libsample.R;
 
 import butterknife.OnClick;
@@ -13,17 +12,17 @@ import skin.support.SkinCompatManager;
  * Created by Administrator .
  * 描述
  */
-public class ThemeFragment extends BaseFragment {
+public class ThemeActivity extends BaseActivity {
 
     private SkinCompatManager.SkinLoaderListener listener = new SkinCompatManager.SkinLoaderListener() {
         @Override
         public void onStart() {
-            System.out.println("ThemeFragment.onStart");
+            System.out.println("ThemeActivity.onStart");
         }
 
         @Override
         public void onSuccess() {
-            System.out.println("ThemeFragment.onSuccess");
+            System.out.println("ThemeActivity.onSuccess");
         }
 
         @Override
@@ -33,8 +32,8 @@ public class ThemeFragment extends BaseFragment {
     };
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_theme;
+    public int getLayoutId() {
+        return R.layout.activity_theme;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class ThemeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
+    public void initView() {
 
     }
 

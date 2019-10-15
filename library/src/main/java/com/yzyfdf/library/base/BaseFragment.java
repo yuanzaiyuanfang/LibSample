@@ -9,23 +9,31 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.billy.android.loading.Gloading;
 import com.yzyfdf.library.rx.RxManager;
 import com.yzyfdf.library.utils.TUtil;
 import com.yzyfdf.library.view.CustomProgressDialog;
+import com.yzyfdf.library.view.globalloading.Gloading;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import es.dmoral.toasty.Toasty;
 
 public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
-    protected View rootView;
-    public T mPresenter;
-    public E mModel;
-    public RxManager mRxManager;
+    protected View      rootView;
+    public    T         mPresenter;
+    public    E         mModel;
+    public    RxManager mRxManager;
 
-    private CustomProgressDialog dialog;
-    public Context mContext;
-    protected Gloading.Holder mHolder;
+    private   CustomProgressDialog dialog;
+    public    Context              mContext;
+    protected Gloading.Holder      mHolder;
+    private   Unbinder             mUnbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Nullable
     @Override
@@ -40,7 +48,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
             });
         }
         mRxManager = new RxManager();
-        ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
         if (mPresenter != null) {
@@ -48,9 +56,14 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         }
         mContext = getContext();
         initPresenter();
-        initView(savedInstanceState);
+        initView();
+        if (savedInstanceState == null) {
+            initData();
+        } else {
+            restoreSavedInstanceState(savedInstanceState);
+        }
         return mHolder.getWrapper();
-//        return rootView;
+        //        return rootView;
     }
 
     //获取布局文件
@@ -60,7 +73,13 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     public abstract void initPresenter();
 
     //初始化view
-    protected abstract void initView(Bundle savedInstanceState);
+    protected abstract void initView();
+
+    protected void initData() {
+    }
+
+    protected void restoreSavedInstanceState(Bundle savedInstanceState) {
+    }
 
     /**
      * 页面加载失败重试，显示加载中，子类继承
@@ -155,7 +174,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
             mRxManager.clear();
         }
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        mUnbinder.unbind();
     }
 
 }

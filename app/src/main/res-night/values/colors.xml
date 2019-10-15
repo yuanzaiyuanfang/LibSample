@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary_night">#333333</color>
-    <color name="colorPrimaryDark_night">#333333</color>
-    <color name="colorAccent_night">#D81B60</color>
 
-    <color name="main_color_night">#333333</color>
-
-    <color name="black_night">#FF000000</color>
-    <color name="black10_night">#1A000000</color>
-    <color name="black25_night">#3F000000</color>
-    <color name="black50_night">#7F000000</color>
-    <color name="black75_night">#BF000000</color>
-
-    <color name="white_night">#FF000000</color>
-    <color name="white25_night">#3FFFFFFF</color>
-    <color name="white50_night">#7FFFFFFF</color>
-
-    <color name="transparent_night">#00000000</color>
-    <color name="ripple_night">#1A000000</color>
-
-    <color name="text_dark_night">#eeeeee</color>
-    <color name="text_color1_night">#cccccc</color>
-    <color name="text_color2_night">#999999</color>
-    <color name="text_hint_night">#222222</color>
-
-    <color name="line_color_night">#F0F0F0</color>
-    <color name="dray_d1_night">#D1D1D1</color>
 
 </resources>
