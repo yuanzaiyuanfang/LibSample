@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.yuanzaiyuanfang'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -107,4 +105,14 @@ dependencies {
     api 'skin.support:skin-support-cardview:4.0.1'
     // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
     api 'skin.support:skin-support-constraint-layout:4.0.1'
+}
+
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    userOrg = 'yuanzaiyuanfang'
+    groupId = 'com.yzyfdf'
+    artifactId = 'LibX'
+    publishVersion = '1.0.0'
+    desc = 'lib'
+    website = 'https://github.com/yuanzaiyuanfang/LibSample'
 }

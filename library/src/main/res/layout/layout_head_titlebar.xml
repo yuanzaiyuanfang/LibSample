@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:centerText=""
-    app:centerTextColor="@color/white"
+    app:centerTextColor="@color/text_light"
     app:centerTextSize="@dimen/sp18"
     app:centerType="textView"
     app:leftImageResource="@mipmap/back_white"
