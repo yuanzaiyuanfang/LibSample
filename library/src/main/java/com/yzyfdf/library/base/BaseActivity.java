@@ -12,6 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import com.yzyfdf.library.rx.RxManager;
 import com.yzyfdf.library.utils.TUtil;
 import com.yzyfdf.library.view.CustomProgressDialog;
@@ -275,23 +276,23 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         });
     }
 
-    //    /**
-    //     * 默认的titlebar 左边返回 中间title
-    //     *
-    //     * @param titleBar
-    //     * @param title
-    //     */
-    //    public void initTitleBar(CommonTitleBar titleBar, String title) {
-    //        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
-    //            @Override
-    //            public void onClicked(View v, int action, String extra) {
-    //                if (action == CommonTitleBar.ACTION_LEFT_BUTTON) {
-    //                    finish();
-    //                }
-    //            }
-    //        });
-    //        titleBar.getCenterTextView().setText(title);
-    //    }
+    /**
+     * 默认的titlebar 左边返回 中间title
+     *
+     * @param titleBar
+     * @param title
+     */
+    public void initTitleBar(CommonTitleBar titleBar, String title) {
+        titleBar.setListener(new CommonTitleBar.OnTitleBarListener() {
+            @Override
+            public void onClicked(View v, int action, String extra) {
+                if (action == CommonTitleBar.ACTION_LEFT_BUTTON) {
+                    finish();
+                }
+            }
+        });
+        titleBar.getCenterTextView().setText(title);
+    }
 
     @Override
     protected void onResume() {

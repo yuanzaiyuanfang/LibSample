@@ -1,8 +1,5 @@
 package com.yzyfdf.library.base;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
@@ -10,6 +7,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -126,6 +127,17 @@ public class BaseRvHolder extends RecyclerView.ViewHolder {
     public void setOnClickListener(int id, View.OnClickListener listener) {
         View view = getViewById(id);
         view.setOnClickListener(listener);
+    }
+
+    /**
+     * view 是否显示
+     *
+     * @return
+     */
+    public BaseRvHolder setViewVisible(@IdRes int viewId, boolean visible) {
+        View view = getViewById(viewId);
+        view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        return this;
     }
 
     /**
