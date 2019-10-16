@@ -36,8 +36,8 @@ project.ext {
     targetSdkVersion = compileSdkVersion
     applicationId = 'com.yzyfdf.libsample'
 
-    versionCode = 10100
-    versionName = '1.1.0'
+    versionCode = 10101
+    versionName = '1.1.1'
     //test,beta,release
     env = 'test'
 }
