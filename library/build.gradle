@@ -83,6 +83,8 @@ dependencies {
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
     //圆角边框
     api 'com.makeramen:roundedimageview:2.3.0'
+    //滑动返回
+    api 'cn.bingoogolapple:bga-swipebacklayout:1.2.0@aar'
 
     //图片选择
 //    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
@@ -112,7 +114,7 @@ publish {
     userOrg = 'yuanzaiyuanfang'
     groupId = 'com.yzyfdf'
     artifactId = 'LibX'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'lib'
     website = 'https://github.com/yuanzaiyuanfang/LibSample'
 }

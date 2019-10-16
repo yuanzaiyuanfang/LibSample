@@ -10,6 +10,8 @@ import com.blankj.utilcode.util.Utils;
 import com.yzyfdf.library.view.globalloading.Gloading;
 import com.yzyfdf.library.view.globalloading.GlobalLoadingAdapter;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+
 /**
  * APPLICATION
  */
@@ -24,6 +26,7 @@ public class BaseApplication extends Application {
         baseApplication = this;
         Utils.init(this);
         Gloading.initDefault(new GlobalLoadingAdapter());
+        BGASwipeBackHelper.init(this, null);
     }
 
     public static Context getAppContext() {
