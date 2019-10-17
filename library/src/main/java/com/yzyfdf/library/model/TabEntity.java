@@ -27,4 +27,24 @@ public class TabEntity implements CustomTabEntity {
     public int getTabUnselectedIcon() {
         return unSelectedIcon;
     }
+
+    @Override
+    public String getSelectedIconUrl() {
+        return null;
+    }
+
+    @Override
+    public String getUnSelectedIconUrl() {
+        return null;
+    }
+
+    @Override
+    public void setSelectedIconUrl(String selectedIconUrl) {
+
+    }
+
+    @Override
+    public void setUnSelectedIconUrl(String unSelectedIconUrl) {
+
+    }
 }

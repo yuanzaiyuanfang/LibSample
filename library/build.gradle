@@ -70,7 +70,7 @@ dependencies {
     //toast
     api 'com.github.GrenderG:Toasty:1.4.2'
     //tab
-    api 'com.flyco.tablayout:FlycoTabLayout_Lib:3.0.0'
+    api 'com.github.yuanzaiyuanfang:FlycoTabLayout:3.0.0'
     //titlebar
     api 'com.wuhenzhizao:titlebar:1.1.4'
     //RecyclerView
@@ -96,7 +96,6 @@ dependencies {
 //    api 'com.azhon:appupdate:2.1.0'
 
 
-
     // skin-support
     api 'skin.support:skin-support:4.0.1'
     // skin-support 基础控件支持
@@ -114,7 +113,7 @@ publish {
     userOrg = 'yuanzaiyuanfang'
     groupId = 'com.yzyfdf'
     artifactId = 'LibX'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'lib'
     website = 'https://github.com/yuanzaiyuanfang/LibSample'
 }

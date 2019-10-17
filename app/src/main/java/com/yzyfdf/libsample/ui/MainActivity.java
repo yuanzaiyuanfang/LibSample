@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
             tabEntitys.add(new TabEntity(titleList.get(i), mIconSelectIds.get(i), mIconUnselectIds.get(i)));
         }
 
-        tabLayout.setTabData(tabEntitys, this, R.id.main_container, fragmentList);
+        tabLayout.setTabData(tabEntitys, getSupportFragmentManager(), R.id.main_container, fragmentList);
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
