@@ -2,8 +2,9 @@ package com.yzyfdf.library.base;
 
 import android.animation.AnimatorSet;
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,12 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
 
         //onBindViewHolder
         onBindVH(holder, position);
+
+        holder.itemView.setOnClickListener(view -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(mList.get(position), position);
+            }
+        });
     }
 
     /**
@@ -79,7 +86,7 @@ public abstract class BaseRvAdapter<VH extends RecyclerView.ViewHolder, T> exten
     }
 
     /**
-     * @param list 刷新
+     * @param list  刷新
      * @param force 删除原来数据或者增加在最前面
      */
     public void refresh(List<? extends T> list, boolean force) {
