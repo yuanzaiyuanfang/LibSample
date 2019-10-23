@@ -8,17 +8,17 @@ import retrofit2.HttpException;
  * @author sjj , 2019/4/25 17:21
  * 自定义重写业务错误处理
  */
-public abstract class RxSubscriber<T> extends BaseRxSubscriber<T> {
+public abstract class DemoRxSubscriber<T> extends BaseRxSubscriber<T> {
 
-    public RxSubscriber(RxManager rxManager) {
+    public DemoRxSubscriber(RxManager rxManager) {
         super(rxManager);
     }
 
-    public RxSubscriber(Context context, RxManager rxManager, boolean showDialog) {
+    public DemoRxSubscriber(Context context, RxManager rxManager, boolean showDialog) {
         super(context, rxManager, showDialog);
     }
 
-    public RxSubscriber(Context context, RxManager rxManager, boolean showDialog, String msg) {
+    public DemoRxSubscriber(Context context, RxManager rxManager, boolean showDialog, String msg) {
         super(context, rxManager, showDialog, msg);
     }
 
