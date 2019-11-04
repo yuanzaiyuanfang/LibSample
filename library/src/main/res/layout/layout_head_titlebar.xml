@@ -10,7 +10,7 @@
     app:centerType="textView"
     app:leftImageResource="@mipmap/back_white"
     app:leftType="imageButton"
-    app:rightType="none"
+    app:rightType="imageButton"
     app:statusBarColor="@color/colorPrimary"
     app:statusBarMode="light"
     app:titleBarColor="@color/colorPrimary"
