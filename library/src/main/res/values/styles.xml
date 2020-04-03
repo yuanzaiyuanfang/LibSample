@@ -11,6 +11,16 @@
         <!--<item name="android:windowAnimationStyle">@style/activity_enter_anim</item>-->
     </style>
 
+    <style name="LaunchTheme" parent="BaseAppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Android 5.x 开始需要把状态栏颜色设为透明，否则会呈现系统默认的灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
     <!--activity动画-->
     <style name="activity_enter_anim" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/act_open_enter</item>
