@@ -97,7 +97,7 @@ publish {
     userOrg = 'yuanzaiyuanfang'
     groupId = 'com.yzyfdf'
     artifactId = 'LibX'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.3'
     desc = 'lib'
     website = 'https://github.com/yuanzaiyuanfang/LibSample'
 }
