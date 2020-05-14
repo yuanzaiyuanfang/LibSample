@@ -29,13 +29,14 @@
         android:paddingTop="2dp"
         android:paddingBottom="@dimen/dp4"
         app:tl_iconMargin="-2dp"
-        tl:tl_iconHeight="@dimen/dp28"
-        tl:tl_iconWidth="@dimen/dp28"
-        tl:tl_indicator_height="0dp"
-        tl:tl_textSelectColor="@color/colorPrimary"
-        tl:tl_textUnselectColor="@color/text3"
-        tl:tl_textsize="@dimen/sp10"
-        tl:tl_underline_height="0dp">
+        app:tl_textSelectSize="@dimen/sp12"
+        app:tl_textUnselectSize="10sp"
+        app:tl_iconHeight="@dimen/dp28"
+        app:tl_iconWidth="@dimen/dp28"
+        app:tl_indicator_height="0dp"
+        app:tl_textSelectColor="@color/colorPrimary"
+        app:tl_textUnselectColor="@color/text3"
+        app:tl_underline_height="0dp">
 
     </com.flyco.tablayout.CommonTabLayout>
 </LinearLayout>

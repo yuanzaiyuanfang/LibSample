@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.noober.background.BackgroundLibrary
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar
 import com.yzyfdf.library.rx.RxManager
 import com.yzyfdf.library.utils.TUtil
 import com.yzyfdf.library.view.CustomProgressDialog
-import es.dmoral.toasty.Toasty
 
 /**
  * 基类
@@ -38,6 +38,8 @@ abstract class BaseActivity<T : BasePresenter<*, *>, E : BaseModel> : AppCompatA
     abstract val layoutId: Int
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+        //通过标签直接生成shape，无需再写shape.xml # https://github.com/JavaNoober/BackgroundLibrary
+        BackgroundLibrary.inject(this)
         super.onCreate(savedInstanceState)
         mRxManager = RxManager()
 

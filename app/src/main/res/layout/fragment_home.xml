@@ -16,8 +16,9 @@
         app:tl_tab_padding="8dp"
         app:tl_textBold="SELECT"
         app:tl_textSelectColor="@color/colorPrimary"
+        app:tl_textSelectSize="@dimen/sp16"
         app:tl_textUnselectColor="@color/text1"
-        app:tl_textsize="@dimen/sp16">
+        app:tl_textUnselectSize="@dimen/sp14">
 
     </com.flyco.tablayout.SlidingTabLayout>
 
