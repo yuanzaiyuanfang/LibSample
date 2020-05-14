@@ -1,12 +1,11 @@
 package com.yzyfdf.library.rx
 
 import android.content.Context
-
 import com.blankj.utilcode.util.NetworkUtils
 import com.yzyfdf.library.R
 import com.yzyfdf.library.base.BaseApplication
 import com.yzyfdf.library.view.CustomProgressDialog
-
+import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
@@ -48,22 +47,68 @@ abstract class BaseRxSubscriber<T>
         }
 
         //        e.printStackTrace()
+
         //网络
         if (!NetworkUtils.isConnected()) {
             _onError(BaseApplication.appContext.getString(R.string.load_no_net))
-        } else if (e is HttpException) {
-            //统一异常处理 自己重写方法
-            servicesError(e)
-        } else {
-            _onError(BaseApplication.appContext.getString(R.string.net_error))
-        } //其它
-        //服务器
-    }
+        }
 
-    protected abstract fun servicesError(e: HttpException)
+        //统一异常处理 自己重写方法
+        val servicesError = _onServicesError(e)
+        if (servicesError) {
+            return
+        }
+
+        //其它
+        _onError(BaseApplication.appContext.getString(R.string.net_error))
+    }
 
     protected abstract fun _onNext(t: T)
 
+    /**
+     * 返回true则自己处理异常
+     */
+    protected abstract fun _onServicesError(e: Throwable): Boolean
+
     protected abstract fun _onError(message: String)
 
+}
+
+/**
+ *
+ * @param serviceError 参照 {@link com.yzyfdf.library.rx.BaseRxSubscriberKt.getDoServiceError}
+ */
+fun <T> Observable<T>.subscribe2(manager: RxManager?,
+                                 success: (t: T) -> Unit,
+                                 error: (msg: String) -> Unit,
+                                 serviceError: (e: Throwable) -> Boolean = { false }) {
+
+    subscribe(object : BaseRxSubscriber<T>(manager) {
+
+        override fun _onNext(t: T) {
+            success(t)
+        }
+
+        override fun _onServicesError(e: Throwable): Boolean {
+            return serviceError(e)
+        }
+
+        override fun _onError(message: String) {
+            error(message)
+        }
+    })
+}
+
+
+var doServiceError: (e: Throwable) -> Boolean = {
+    if (it is HttpException) {
+        try {
+            val string = it.response()?.errorBody()?.string()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    } else {
+        false
+    }
 }

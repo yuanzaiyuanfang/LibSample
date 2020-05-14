@@ -97,7 +97,7 @@ class AppManager private constructor(var activityStack: Stack<Activity>) {
     /**
      * 结束其他所有Activity
      */
-    fun finishOtherActivitys(cls: Class<Activity>?) {
+    fun finishOtherActivitys(cls: Class<out Activity>?) {
         if (cls == null) {
             return
         }

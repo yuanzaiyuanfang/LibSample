@@ -5,6 +5,7 @@ import com.yzyfdf.library.base.BaseFragment
 import com.yzyfdf.library.base.BaseModel
 import com.yzyfdf.library.base.BasePresenter
 import com.yzyfdf.library.rx.RxHelper
+import com.yzyfdf.library.rx.subscribe2
 import com.yzyfdf.library.utils.showErrTip
 import com.yzyfdf.library.utils.showSuccessTip
 import com.yzyfdf.library.utils.showToast
@@ -12,10 +13,8 @@ import com.yzyfdf.library.view.DividerDecoration
 import com.yzyfdf.library.view.globalloading.Gloading
 import com.yzyfdf.libsample.R
 import com.yzyfdf.libsample.adapter.InfoAdapter
-import com.yzyfdf.libsample.api.RxSubscriber
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_info.*
 import java.util.*
@@ -136,22 +135,13 @@ class InfoFragment : BaseFragment<BasePresenter<*, *>, BaseModel>() {
                 //            .toSortedList { obj, anotherString -> obj.compareTo(anotherString) } //自己排序
                 .toObservable()
                 .compose(RxHelper::threadOnly)
-                .subscribe(object : RxSubscriber<List<String>>(mRxManager) {
-                    override fun onSubscribe(d: Disposable) {
-                        super.onSubscribe(d)
-                        println("InfoFragment.onSubscribe" + "----" + System.currentTimeMillis())
-                    }
-
-                    override fun _onNext(strings: List<String>) {
-                        println("InfoFragment._onNext" + "----" + System.currentTimeMillis())
-                        setData(strings)
-                    }
-
-                    override fun _onError(message: String) {
-                        println("message = $message")
-                        holder?.showLoadFailed()
-                        loadComplete()
-                    }
+                .subscribe2(mRxManager, {
+                    println("InfoFragment._onNext" + "----" + System.currentTimeMillis())
+                    setData(it)
+                }, {
+                    println("message = $it")
+                    holder?.showLoadFailed()
+                    loadComplete()
                 })
 
     }

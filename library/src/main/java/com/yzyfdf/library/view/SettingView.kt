@@ -60,7 +60,7 @@ class SettingView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     /*选中状态*/
     private var mChecked: Boolean = false
     /*点击事件*/
-    private var mOnSettingItemClick: OnSettingItemClick? = null
+    private lateinit var mOnSettingItemClick: (isChecked: Boolean) -> Unit
 
     init {
         initView(context)
@@ -69,19 +69,19 @@ class SettingView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         switchRightStyle(mRightStyle)
         mRootLayout!!.setOnClickListener { clickOn() }
         mRightIcon_check!!.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (mOnSettingItemClick != null) {
-                mOnSettingItemClick!!.click(isChecked)
+            if (::mOnSettingItemClick.isInitialized) {
+                mOnSettingItemClick(isChecked)
             }
         }
         mRightIcon_switch!!.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (mOnSettingItemClick != null) {
-                mOnSettingItemClick!!.click(isChecked)
+            if (::mOnSettingItemClick.isInitialized) {
+                mOnSettingItemClick(isChecked)
             }
         }
     }
 
-    fun setmOnSettingItemClick(mOnSettingItemClick: OnSettingItemClick) {
-        this.mOnSettingItemClick = mOnSettingItemClick
+    fun setOnSettingItemClick(click: (isChecked: Boolean) -> Unit) {
+        mOnSettingItemClick = click
     }
 
     /**
@@ -213,8 +213,8 @@ class SettingView @JvmOverloads constructor(context: Context, attrs: AttributeSe
      */
     fun clickOn() {
         when (mRightStyle) {
-            0, 1 -> if (null != mOnSettingItemClick) {
-                mOnSettingItemClick!!.click(mChecked)
+            0, 1 -> if (::mOnSettingItemClick.isInitialized) {
+                mOnSettingItemClick(mChecked)
             }
             2 -> {
                 //选择框切换选中状态

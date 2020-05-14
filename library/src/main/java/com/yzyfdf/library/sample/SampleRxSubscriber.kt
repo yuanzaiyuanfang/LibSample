@@ -3,7 +3,6 @@ package com.yzyfdf.library.sample
 import android.content.Context
 import com.yzyfdf.library.rx.BaseRxSubscriber
 import com.yzyfdf.library.rx.RxManager
-
 import retrofit2.HttpException
 
 /**
@@ -19,23 +18,17 @@ abstract class SampleRxSubscriber<T> : BaseRxSubscriber<T> {
     constructor(rxManager: RxManager, context: Context,
                 msg: String) : super(rxManager, context, msg)
 
-    public override fun servicesError(e: HttpException) {
-        //        try {
-        //            String string = e.response().errorBody().string();
-        //            BaseErrorBean errorBean = GsonUtils.fromJson(string, new TypeToken<BaseErrorBean>() {
-        //            }.getType());
-        //
-        //            int code = errorBean.getCode();
-        //            String message = errorBean.getMessage();
-        //            _onError(message);
-        //            LogUtils.e(code, message);
-        //        } catch (Exception ignored) {
-        //        }
-        //
-        //        switch (e.code()) {
-        //            case 401:
-        //                IntentGo.getInstance().goLoginActivity();
-        //                break;
-        //        }
+    public override fun _onServicesError(e: Throwable): Boolean {
+        if (e is HttpException) {
+            try {
+                val string = e.response()?.errorBody()?.string()
+                println("string = ${string}")
+                return true
+            } catch (e: Exception) {
+                return false
+            }
+        } else {
+            return false
+        }
     }
 }

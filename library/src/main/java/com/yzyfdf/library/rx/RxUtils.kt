@@ -11,7 +11,7 @@ import io.reactivex.Observable
 object RxUtils {
 
     fun <R> createObservable(callable: Callable<R>): Observable<R> {
-        return Observable.create<R>{
+        return Observable.create<R> {
             try {
                 val result = callable.call()
                 it.onNext(result)
@@ -22,4 +22,6 @@ object RxUtils {
             it.onComplete()
         }
     }
+
 }
+
